@@ -11,3 +11,25 @@ You can also export messages from the database to CSV on your memory card for do
 
 The phone is also aware of multiple SIMS on the phone so it can receive messages on the different SIMS and forward to different URLS. Essentially, it means the app can be used to host two SIMS for two different applications entirely.
 
+Sample PHP receiver Script
+<?php
+define("SMS_SECRET", "xxxxxx");
+$data = $_POST;
+
+/*$data = array("Secret" => "adogan",
+			"id" => "1",						
+			"sender" => "+2348039231004",
+			"date" => "2014-07-21 03:30:20",
+			"message" => "O ma ga ooo"); */
+
+if (@$data["Secret"] != SMS_SECRET) die("ok");
+
+
+@mysql_select_db("sms_db", @mysql_connect("localhost", "username", "password"));
+
+if (@mysql_query("INSERT INTO incoming_message(phone, message, date_added) " .
+	"VALUES('" . addslashes($data['sender']) . "', '" . addslashes($data['message']) . "', '" . addslashes($data['date']) . "')")) {
+	echo "ok";
+}
+
+?>
