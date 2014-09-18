@@ -1,0 +1,16 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+  
+	<ListView android:id="@+id/view_messages"
+ 		android:layout_width="fill_parent"
+ 		android:layout_height="fill_parent"
+ 		android:paddingTop="11px"    
+    	android:paddingBottom="70px"    	    
+    	android:paddingLeft="5px"
+    	android:paddingRight="5px"    
+    	android:fadingEdge="none"
+    	android:cacheColorHint="#00000000"
+    	android:scrollbars="none"/>
+ 		
+</RelativeLayout>

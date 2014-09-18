@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="Preferences" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <EditTextPreference
+        android:key="UniqueId"
+        android:title="Device ID"
+        android:summary="Tap to enter..."
+        android:dialogTitle="Device ID"
+    />
+    
+    <EditTextPreference
+        android:key="Secret"
+        android:title="Server Secret"
+        android:summary="This is an added level of Security for the URL..."
+        android:dialogTitle="Server Secret"
+    />
+    
+    <EditTextPreference
+        android:key="SMSCSPref"
+        android:title="SMSCS"
+        android:summary="Short Message Centres"
+        android:dialogTitle="SMSCS List"
+        android:defaultValue=
+"+234803
++234805
++234809
++234802"
+    />
+    
+    <EditTextPreference
+        android:key="URLSPref"
+        android:title="URLS"
+        android:summary="Notification URLs"
+        android:dialogTitle="URLS List"
+        android:defaultValue=
+"http://macgrenor.com/smsg/
+http://44.23.10.55
+
+"
+    />
+    
+    <CheckBoxPreference
+        android:key="captureMessages"
+        android:title="Capture Messages?"
+        android:summary="Switch on/off the capture service..."
+        android:dialogTitle="Capture Messages?"
+        android:defaultValue="false"        
+    />
+   
+</PreferenceScreen>
