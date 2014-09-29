@@ -29,6 +29,7 @@ import org.macgrenor.smsgateway.R;
 import org.macgrenor.smsgateway.data.ClientHttpRequest;
 import org.macgrenor.smsgateway.data.DataProvider;
 import org.macgrenor.smsgateway.services.MessageItem;
+import org.macgrenor.smsgateway.services.SMSreceiver;
 
 import android.os.Bundle;
 import android.os.Environment;
@@ -106,6 +107,9 @@ public class MainScreen extends Activity {
 			return true;
 		case R.id.export_csv:
 			exportDatabasetoFile();
+			return true;
+		case R.id.flush_sms_cache:
+			SMSreceiver.flushSMSCache();
 			return true;
 		}
 		return true;

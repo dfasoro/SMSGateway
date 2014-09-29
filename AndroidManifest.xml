@@ -32,9 +32,10 @@
         <service android:name="org.macgrenor.smsgateway.services.ServiceCommunicator" android:enabled="true" android:label="SMS Receiver"></service>
      
      <!-- Declaring broadcast receiver for BOOT_COMPLETED event -->
-        <receiver android:name="org.macgrenor.smsgateway.services.BootReceiver" android:enabled="true" android:exported="false">
+        <receiver android:name="org.macgrenor.smsgateway.services.BootReceiver" android:enabled="true" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </receiver>
         <activity android:name="org.macgrenor.smsgateway.Settings" android:label="SMS Capture Settings"></activity>

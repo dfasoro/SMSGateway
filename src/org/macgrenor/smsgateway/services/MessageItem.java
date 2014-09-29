@@ -12,6 +12,6 @@ public class MessageItem {
 	}
 	
 	public String toString() {
-		return Sender + " : " + Message.substring(0, Math.min(Message.length(), 50)-1);
+		return Sender + " : " + Message.substring(0, Math.min(Message.length(), 50));
 	}
 }

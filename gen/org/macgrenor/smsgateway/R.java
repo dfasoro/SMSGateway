@@ -26,6 +26,7 @@ public final class R {
     public static final class id {
         public static final int action_settings=0x7f080001;
         public static final int export_csv=0x7f080002;
+        public static final int flush_sms_cache=0x7f080003;
         public static final int view_messages=0x7f080000;
     }
     public static final class layout {
