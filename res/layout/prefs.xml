@@ -24,10 +24,8 @@
         android:summary="Short Message Centres"
         android:dialogTitle="SMSCS List"
         android:defaultValue=
-"+234803
-+234805
-+234809
-+234802"
+"1
+2"
     />
     
     <EditTextPreference
@@ -36,10 +34,8 @@
         android:summary="Notification URLs"
         android:dialogTitle="URLS List"
         android:defaultValue=
-"http://macgrenor.com/smsg/
-http://44.23.10.55
-
-"
+"http://firstone.com/
+http://secondone.com/"
     />
     
     <CheckBoxPreference

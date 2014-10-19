@@ -30,8 +30,8 @@ public class Preferences {
 		final SharedPreferences settings = context.getSharedPreferences(
 				PREF_NAME, 0);
 		Secret = settings.getString("Secret", "");
-		SMSCS = settings.getString("SMSCSPref", "http://macgrenor.com/smsg/\nhttp://44.23.10.55\n\n");
-		URLS = settings.getString("URLSPref", "+234803\n+234805\n+234809\n+234802");
+		SMSCS = settings.getString("SMSCSPref", "http://firstone.com/\nhttp://secondone.com");
+		URLS = settings.getString("URLSPref", "1\n2");
 		uniqueId = settings.getString("UniqueId", "");
 		captureMessages = settings.getBoolean("captureMessages", false);
 	}

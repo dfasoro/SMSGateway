@@ -40,9 +40,11 @@ public class ProcessSMS extends Thread {
 	@Override
 	public void run() {
 		//read DB for unprocessed threads ...
-		try {
-			sleep(1 * 1000);
-		} catch (InterruptedException e) { }
+		synchronized(this) {
+			try {
+				wait(5 * 1000); //wait 5 secs
+			} catch (InterruptedException e) { }
+		}
 		
 		while (true) {
 			SQLiteQueryBuilder qb1 = new SQLiteQueryBuilder();
@@ -55,9 +57,11 @@ public class ProcessSMS extends Thread {
 				//No Item to process in database
 				msgs.close();
 				
-				try {
-					sleep(5 * 60 * 1000); //wait 5 minutes
-				} catch (InterruptedException e) { }
+				synchronized(this) {
+					try {
+						wait(5 * 60 * 1000); //wait 5 minutes
+					} catch (InterruptedException e) { }
+				}
 				
 				continue;
 			}
@@ -133,7 +137,7 @@ public class ProcessSMS extends Thread {
 					
 					if (resp == null) {
 						try {
-							Thread.sleep(2000); //Wait for 5secs cos there was error.
+							Thread.sleep(5000); //Wait for 5secs cos there was a conn error.
 						} catch (InterruptedException e) { }
 					}
 					else {					

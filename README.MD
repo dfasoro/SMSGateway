@@ -17,11 +17,11 @@ Sample PHP receiver Script
 define("SMS_SECRET", "xxxxxx");
 $data = $_POST;
 
-/*$data = array("Secret" => "adogan",
-			"id" => "1",						
-			"sender" => "+2348039231004",
+/*$data = array("Secret" => "xxxxxx",
+			"id" => "10",						
+			"sender" => "+234...",
 			"date" => "2014-07-21 03:30:20",
-			"message" => "O ma ga ooo"); */
+			"message" => "Test Message"); */
 
 if (@$data["Secret"] != SMS_SECRET) die("ok");
 

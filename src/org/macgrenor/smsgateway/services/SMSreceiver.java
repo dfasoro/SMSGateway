@@ -90,7 +90,9 @@ public class SMSreceiver extends BroadcastReceiver {
 						Log.e(getClass().getName(), "List Injection", e);					
 					}
 					
-					SMSApplication.ProcessThread.interrupt();
+					synchronized(SMSApplication.ProcessThread) {
+						SMSApplication.ProcessThread.notify();
+					}
 					
 					receiverCounter += 1;
 					if (receiverCounter % 100 == 0) SMSreceiver.flushSMSCache();
