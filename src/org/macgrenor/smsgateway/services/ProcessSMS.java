@@ -2,28 +2,25 @@ package org.macgrenor.smsgateway.services;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.TimeZone;
-import java.util.regex.Pattern;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.macgrenor.smsgateway.Preferences;
-import org.macgrenor.smsgateway.SMSApplication;
-import org.macgrenor.smsgateway.data.ClientHttpRequest;
 import org.macgrenor.smsgateway.data.DataProvider;
+import org.macgrenor.smsgateway.data.MainHttpClient;
 
-import android.app.PendingIntent;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteQueryBuilder;
-import android.telephony.PhoneNumberUtils;
-import android.telephony.SmsManager;
-import android.text.format.DateFormat;
-import android.text.format.DateUtils;
-import android.util.Log;
 import au.com.bytecode.opencsv.CSVWriter;
 
 public class ProcessSMS extends Thread {
@@ -116,7 +113,7 @@ public class ProcessSMS extends Thread {
 				
 				if (syncUrl.length() >= 8) {
 					String resp = null;
-					
+					/*
 					ClientHttpRequest conn = null;
 					try {
 						conn = new ClientHttpRequest(syncUrl, 5 * 1000);
@@ -133,6 +130,38 @@ public class ProcessSMS extends Thread {
 					}
 					finally {
 						if (conn != null) conn.closeAll();
+					}
+					*/
+					
+					HttpPost httppost = new HttpPost(syncUrl);
+					MainHttpClient mhttpclient = new MainHttpClient(syncUrl);
+					HttpResponse response = null;
+					try {
+
+						// Add your data
+						List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
+						nameValuePairs.add(new BasicNameValuePair("Secret", Preferences.Secret));
+						nameValuePairs.add(new BasicNameValuePair("id", "" + recordId));						
+						nameValuePairs.add(new BasicNameValuePair("sender", senderOriginal));
+						nameValuePairs.add(new BasicNameValuePair("date", messageDate));
+						nameValuePairs.add(new BasicNameValuePair("message", message));
+						
+						httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,
+								HTTP.UTF_8));
+
+						// Execute HTTP Post Request
+						response = mhttpclient.httpclient.execute(httppost);
+						int statusCode = response.getStatusLine().getStatusCode();
+						
+						if (statusCode == 200 || statusCode == 201) {
+							resp = mhttpclient.getText(response);
+						}
+
+					} catch (Exception e) {
+						try {
+							response.getEntity().getContent().close();
+						}
+						catch (Exception e1) { }
 					}
 					
 					if (resp == null) {
